@@ -1,0 +1,85 @@
+<div class="card" *ngIf="isLoading">
+        <h4 class="card-header">Loading...</h4>
+        <div class="card-block text-xs-center">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+        </div>
+</div>
+<app-toast [message]="toast.message"></app-toast>
+<!--<h4 *ngIf="auth.authenticated()">You are logged in</h4>
+<h4 *ngIf="!auth.authenticated()">You are not logged in, please click 'Log in' button to login</h4>-->
+
+<div class="card" *ngIf="!isEditing">
+        <h4 class="card-header">Add new product</h4>
+        <div class="card-block">
+                <form class="form-inline" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
+                        <div class="form-group">
+                                <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+                         </div>
+                        <div class="form-group">
+                                <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email" min="0">
+                        </div>
+                        <div class="form-group">
+                                <input type="text" name="product_invention_name" class="form-control" formControlName="product_invention_name" placeholder="Product/Invention Name">
+                        </div>
+                        <div class="form-group">
+                                <textarea class="form-control" type="text" name="description" formControlName="description" placeholder="Desrcription" step="any"min="0"></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+                </form>
+        </div>
+</div>
+<div class="card" >
+        <h4 class="card-header">{{ product.name }} Product</h4>
+        <div class="card-block">
+                <table class="table table-bordered table-striped">
+                        <thead class="thead-default">
+                                <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Product/Invention Name</th>
+                                        <th>Description</th>
+                                        <th>Actions</th>
+                                </tr>
+                        </thead>
+                        <tbody *ngIf="product.length === 0">
+                                <tr>
+                                        <td colspan="5">You have not added a product yet</td>
+                                </tr>
+                        </tbody>
+                        <tbody *ngIf="!isEditing">
+                                <tr>
+                                        <td>{{product.name}}</td>
+                                        <td>{{product.email}}</td>
+                                        <td>{{product.product_invention_name}}</td>
+                                        <td>{{product.description}}</td>
+                                        <td>
+                                                        <button class="btn btn-sm btn-warning" (click)="enableEditing(product)"><i class="fa fa-pencil"></i> Edit</button>            <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)"><i class="fa fa-trash"></i> Delete</button>
+                                         </td>
+                                </tr>
+                        </tbody>
+                        <tbody *ngIf="isEditing">
+                                <tr>
+                                        <td colspan="4">
+                                                <form class="form-inline" #form="ngForm" (ngSubmit)="editProduct(product)" style="display:inline">
+                                                        <div class="form-group">
+                                                                <input class="form-control" type="text" name="name" [(ngModel)]="product.name" placeholder="Name" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <input class="form-control" type="text" name="email" [(ngModel)]="product.email" placeholder="Email" min="0" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <input class="form-control" type="text" name="product_invention_name" [(ngModel)]="product.product_invention_name" placeholder="Product/Invention Name" min="0" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <textarea class="form-control" type="text" name="description" [(ngModel)]="product.description" placeholder="Description" step="any" min="0" required></textarea>
+                                                        </div>
+                                                         <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
+                                                </form>
+                                                 <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+                                        </td>
+                                </tr>
+                        </tbody>
+                </table>
+        </div>
+</div>
+

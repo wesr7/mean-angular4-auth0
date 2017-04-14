@@ -1,0 +1,21 @@
+<div class="container">
+
+	<nav class="navbar navbar-dark bg-primary">
+    		<div class="nav navbar-nav">
+      			<a routerLink="/" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        			<i class="fa fa-home"></i> Home
+      			</a>
+      			<a routerLink="/about" class="nav-item nav-link" routerLinkActive="active">
+        			<i class="fa fa-info-circle"></i> About
+      			</a>
+			<a *ngIf="auth.authenticated()" routerLink="/admin" class="nav-item nav-link" routerLinkActive="active">
+				<i class=""></i> Admin
+			</a>
+			       	<button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+      				<button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+    		</div>
+  	</nav>
+
+  <router-outlet></router-outlet>
+
+</div>
