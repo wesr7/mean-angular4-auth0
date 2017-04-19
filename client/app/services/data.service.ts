@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AUTH_PROVIDERS, AuthHttp } from 'angular2-jwt';
-import { myConfig }        from '../auth.config';
+import { AuthConfig }        from '../auth.config';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 

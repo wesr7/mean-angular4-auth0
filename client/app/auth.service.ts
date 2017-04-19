@@ -1,7 +1,7 @@
 import { Injectable }      from '@angular/core';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
-import { myConfig }        from './auth.config';
+import { AuthConfig }        from './auth.config';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -9,7 +9,7 @@ declare var Auth0Lock: any;
 @Injectable()
 export class Auth {
   // Configure Auth0
-  lock = new Auth0Lock(myConfig.clientID, myConfig.domain, {auth: {redirect: false}});
+  lock = new Auth0Lock(AuthConfig.clientId, AuthConfig.domain, {auth: {redirect: false}});
 
   constructor( private router: Router) {
     // Add callback for lock `authenticated` event
